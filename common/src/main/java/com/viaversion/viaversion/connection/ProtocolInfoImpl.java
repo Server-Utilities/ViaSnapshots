@@ -57,7 +57,7 @@ public class ProtocolInfoImpl implements ProtocolInfo {
     public void setProtocolVersion(int protocolVersion) {
         // Map snapshot versions to the higher/orderer release version
         ProtocolVersion protocol = ProtocolVersion.getProtocol(protocolVersion);
-        this.protocolVersion = protocol.getVersion();
+        this.protocolVersion = protocol.getOriginalVersion();
     }
 
     @Override
@@ -68,7 +68,7 @@ public class ProtocolInfoImpl implements ProtocolInfo {
     @Override
     public void setServerProtocolVersion(int serverProtocolVersion) {
         ProtocolVersion protocol = ProtocolVersion.getProtocol(serverProtocolVersion);
-        this.serverProtocolVersion = protocol.getVersion();
+        this.serverProtocolVersion = protocol.getOriginalVersion();
     }
 
     @Override

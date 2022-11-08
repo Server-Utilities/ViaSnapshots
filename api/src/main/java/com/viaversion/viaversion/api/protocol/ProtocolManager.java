@@ -65,7 +65,7 @@ public interface ProtocolManager {
      * @see #getProtocolPath(int, int) to get a full path of Protocols between a larger gap of versions
      */
     default @Nullable Protocol getProtocol(ProtocolVersion clientVersion, ProtocolVersion serverVersion) {
-        return getProtocol(clientVersion.getVersion(), serverVersion.getVersion());
+        return getProtocol(clientVersion.getOriginalVersion(), serverVersion.getOriginalVersion());
     }
 
     /**

@@ -85,7 +85,7 @@ public class BaseProtocol1_7 extends AbstractProtocol {
 
                             if (!Via.getAPI().getServerVersion().isKnown()) { // Set the Server protocol if the detection on startup failed
                                 ProtocolManagerImpl protocolManager = (ProtocolManagerImpl) Via.getManager().getProtocolManager();
-                                protocolManager.setServerProtocol(new ServerProtocolVersionSingleton(ProtocolVersion.getProtocol(protocolVersion).getVersion()));
+                                protocolManager.setServerProtocol(new ServerProtocolVersionSingleton(ProtocolVersion.getProtocol(protocolVersion).getOriginalVersion()));
                             }
 
                             // Ensure the server has a version provider

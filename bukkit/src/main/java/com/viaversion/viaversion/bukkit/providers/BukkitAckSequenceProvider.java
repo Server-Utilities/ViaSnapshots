@@ -38,7 +38,7 @@ public final class BukkitAckSequenceProvider extends AckSequenceProvider {
         final int previousSequence = sequenceStorage.setSequenceId(sequence);
         if (previousSequence == -1) {
             final int serverProtocolVersion = connection.getProtocolInfo().getServerProtocolVersion();
-            final long delay = serverProtocolVersion > ProtocolVersion.v1_8.getVersion() && serverProtocolVersion < ProtocolVersion.v1_14.getVersion() ? 2 : 1;
+            final long delay = serverProtocolVersion > ProtocolVersion.v1_8.getOriginalVersion() && serverProtocolVersion < ProtocolVersion.v1_14.getOriginalVersion() ? 2 : 1;
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new AckSequenceTask(connection, sequenceStorage), delay);
         }
     }

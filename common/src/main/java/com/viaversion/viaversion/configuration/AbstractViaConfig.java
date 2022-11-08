@@ -185,12 +185,12 @@ public abstract class AbstractViaConfig extends Config implements ViaVersionConf
                     if (lowerBound != -1) {
                         Via.getPlatform().getLogger().warning("Already set lower bound " + lowerBound + " overridden by " + protocolVersion.getName());
                     }
-                    lowerBound = protocolVersion.getVersion();
+                    lowerBound = protocolVersion.getOriginalVersion();
                 } else {
                     if (upperBound != -1) {
                         Via.getPlatform().getLogger().warning("Already set upper bound " + upperBound + " overridden by " + protocolVersion.getName());
                     }
-                    upperBound = protocolVersion.getVersion();
+                    upperBound = protocolVersion.getOriginalVersion();
                 }
                 continue;
             }
@@ -201,8 +201,8 @@ public abstract class AbstractViaConfig extends Config implements ViaVersionConf
             }
 
             // Add single protocol version and check for duplication
-            if (!blockedProtocols.add(protocolVersion.getVersion())) {
-                Via.getPlatform().getLogger().warning("Duplicated blocked protocol version " + protocolVersion.getName() + "/" + protocolVersion.getVersion());
+            if (!blockedProtocols.add(protocolVersion.getOriginalVersion())) {
+                Via.getPlatform().getLogger().warning("Duplicated blocked protocol version " + protocolVersion.getName() + "/" + protocolVersion.getOriginalVersion());
             }
         }
 
@@ -214,7 +214,7 @@ public abstract class AbstractViaConfig extends Config implements ViaVersionConf
                 if (finalLowerBound != -1 && version < finalLowerBound || finalUpperBound != -1 && version > finalUpperBound) {
                     ProtocolVersion protocolVersion = ProtocolVersion.getProtocol(version);
                     Via.getPlatform().getLogger().warning("Blocked protocol version "
-                            + protocolVersion.getName() + "/" + protocolVersion.getVersion() + " already covered by upper or lower bound");
+                            + protocolVersion.getName() + "/" + protocolVersion.getOriginalVersion() + " already covered by upper or lower bound");
                     return true;
                 }
                 return false;

@@ -165,7 +165,7 @@ public class BungeeServerHandler implements Listener {
 
                     int protocolId = Via.proxyPlatform().protocolDetectorService().serverProtocolVersion(serverName);
 
-                    if (protocolId <= ProtocolVersion.v1_8.getVersion()) { // 1.8 doesn't have BossBar packet
+                    if (protocolId <= ProtocolVersion.v1_8.getOriginalVersion()) { // 1.8 doesn't have BossBar packet
                         if (storage.getBossbar() != null) {
                             // This ensures we can encode it properly as only the 1.9 protocol is currently implemented.
                             if (user.getProtocolInfo().getPipeline().contains(Protocol1_9To1_8.class)) {
@@ -204,7 +204,7 @@ public class BungeeServerHandler implements Listener {
                     pipeline.add(Via.getManager().getProtocolManager().getBaseProtocol(protocolId));
 
                     // Workaround 1.13 server change
-                    int id1_13 = ProtocolVersion.v1_13.getVersion();
+                    int id1_13 = ProtocolVersion.v1_13.getOriginalVersion();
                     boolean toNewId = previousServerProtocol < id1_13 && protocolId >= id1_13;
                     boolean toOldId = previousServerProtocol >= id1_13 && protocolId < id1_13;
                     if (previousServerProtocol != -1 && (toNewId || toOldId)) {

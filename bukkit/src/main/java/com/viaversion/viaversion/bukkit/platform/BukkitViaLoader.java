@@ -95,7 +95,7 @@ public class BukkitViaLoader implements ViaPlatformLoader {
         int serverProtocolVersion = Via.getAPI().getServerVersion().lowestSupportedVersion();
 
         /* 1.9 client to 1.8 server */
-        if (serverProtocolVersion < ProtocolVersion.v1_9.getVersion()) {
+        if (serverProtocolVersion < ProtocolVersion.v1_9.getOriginalVersion()) {
             storeListener(new ArmorListener(plugin)).register();
             storeListener(new DeathListener(plugin)).register();
             storeListener(new BlockListener(plugin)).register();
@@ -106,8 +106,8 @@ public class BukkitViaLoader implements ViaPlatformLoader {
             }
         }
 
-        if (serverProtocolVersion < ProtocolVersion.v1_14.getVersion()) {
-            boolean use1_9Fix = plugin.getConf().is1_9HitboxFix() && serverProtocolVersion < ProtocolVersion.v1_9.getVersion();
+        if (serverProtocolVersion < ProtocolVersion.v1_14.getOriginalVersion()) {
+            boolean use1_9Fix = plugin.getConf().is1_9HitboxFix() && serverProtocolVersion < ProtocolVersion.v1_9.getOriginalVersion();
             if (use1_9Fix || plugin.getConf().is1_14HitboxFix()) {
                 try {
                     storeListener(new PlayerSneakListener(plugin, use1_9Fix, plugin.getConf().is1_14HitboxFix())).register();
@@ -118,7 +118,7 @@ public class BukkitViaLoader implements ViaPlatformLoader {
             }
         }
 
-        if (serverProtocolVersion < ProtocolVersion.v1_15.getVersion()) {
+        if (serverProtocolVersion < ProtocolVersion.v1_15.getOriginalVersion()) {
             try {
                 Class.forName("org.bukkit.event.entity.EntityToggleGlideEvent");
                 storeListener(new EntityToggleGlideListener(plugin)).register();
@@ -126,7 +126,7 @@ public class BukkitViaLoader implements ViaPlatformLoader {
             }
         }
 
-        if (serverProtocolVersion < ProtocolVersion.v1_12.getVersion() && !Boolean.getBoolean("com.viaversion.ignorePaperBlockPlacePatch")) {
+        if (serverProtocolVersion < ProtocolVersion.v1_12.getOriginalVersion() && !Boolean.getBoolean("com.viaversion.ignorePaperBlockPlacePatch")) {
             boolean paper = true;
             try {
                 Class.forName("org.github.paperspigot.PaperSpigotConfig"); // Paper 1.8 ?
@@ -143,7 +143,7 @@ public class BukkitViaLoader implements ViaPlatformLoader {
         }
 
         /* Providers */
-        if (serverProtocolVersion < ProtocolVersion.v1_9.getVersion()) {
+        if (serverProtocolVersion < ProtocolVersion.v1_9.getOriginalVersion()) {
             Via.getManager().getProviders().use(MovementTransmitterProvider.class, new BukkitViaMovementTransmitter());
 
             Via.getManager().getProviders().use(HandItemProvider.class, new HandItemProvider() {
@@ -171,19 +171,19 @@ public class BukkitViaLoader implements ViaPlatformLoader {
             });
         }
 
-        if (serverProtocolVersion < ProtocolVersion.v1_12.getVersion()) {
+        if (serverProtocolVersion < ProtocolVersion.v1_12.getOriginalVersion()) {
             if (plugin.getConf().is1_12QuickMoveActionFix()) {
                 Via.getManager().getProviders().use(InventoryQuickMoveProvider.class, new BukkitInventoryQuickMoveProvider());
             }
         }
-        if (serverProtocolVersion < ProtocolVersion.v1_13.getVersion()) {
+        if (serverProtocolVersion < ProtocolVersion.v1_13.getOriginalVersion()) {
             if (Via.getConfig().getBlockConnectionMethod().equalsIgnoreCase("world")) {
                 BukkitBlockConnectionProvider blockConnectionProvider = new BukkitBlockConnectionProvider();
                 Via.getManager().getProviders().use(BlockConnectionProvider.class, blockConnectionProvider);
                 ConnectionData.blockConnectionProvider = blockConnectionProvider;
             }
         }
-        if (serverProtocolVersion < ProtocolVersion.v1_19.getVersion()) {
+        if (serverProtocolVersion < ProtocolVersion.v1_19.getOriginalVersion()) {
             Via.getManager().getProviders().use(AckSequenceProvider.class, new BukkitAckSequenceProvider(plugin));
             storeListener(new BlockBreakListener(plugin)).register();
         }

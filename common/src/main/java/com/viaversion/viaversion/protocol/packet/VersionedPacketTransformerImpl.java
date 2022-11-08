@@ -46,7 +46,7 @@ public class VersionedPacketTransformerImpl<C extends ClientboundPacketType, S e
         Preconditions.checkNotNull(inputVersion);
         Preconditions.checkArgument(clientboundPacketsClass != null || serverboundPacketsClass != null,
                 "Either the clientbound or serverbound packets class has to be non-null");
-        this.inputProtocolVersion = inputVersion.getVersion();
+        this.inputProtocolVersion = inputVersion.getOriginalVersion();
         this.clientboundPacketsClass = clientboundPacketsClass;
         this.serverboundPacketsClass = serverboundPacketsClass;
     }

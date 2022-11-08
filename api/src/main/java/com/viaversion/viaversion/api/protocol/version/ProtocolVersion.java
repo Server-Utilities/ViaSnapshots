@@ -109,7 +109,7 @@ public class ProtocolVersion {
     public static ProtocolVersion register(int version, int snapshotVersion, String name, @Nullable VersionRange versionRange) {
         ProtocolVersion protocol = new ProtocolVersion(version, snapshotVersion, name, versionRange);
         VERSION_LIST.add(protocol);
-        VERSIONS.put(protocol.getVersion(), protocol);
+        VERSIONS.put(protocol.getOriginalVersion(), protocol);
         if (protocol.isSnapshot()) {
             VERSIONS.put(protocol.getFullSnapshotVersion(), protocol);
         }
